@@ -18,7 +18,7 @@
 ## ⚠️ Aviso Importante
 
 Este repositório começou como um espaço para estudar **Java** do básico ao avançado,  
-mas acabou crescendo para incluir outras linguagens e tecnologias como **Node.js**, **GraphQL** e mais.  
+mas acabou crescendo para incluir outras linguagens e tecnologias como **Node.js**, **GraphQL** e mais.
 
 Se você também quer aprender, está no lugar certo. Todo o conteúdo é aberto e organizado para que qualquer pessoa possa acompanhar no seu ritmo.
 
