@@ -27,4 +27,12 @@ public class Reserva {
     private LocalTime horaInicio;
 
     private LocalTime horaFim;
+
+    public LocalTime getDataHoraInicio() {
+        return horaInicio;
+    }
+
+    public LocalTime getDataHoraFim() {
+        return horaFim;
+    }
 }
