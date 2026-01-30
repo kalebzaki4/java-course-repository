@@ -4,9 +4,9 @@ import com.desafio.Reserva.de.salas.model.Reserva;
 import com.desafio.Reserva.de.salas.repository.ReservaRepository;
 import com.desafio.Reserva.de.salas.service.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,23 +33,23 @@ public class ReservaController {
 
     // Endpoint para criar uma nova reserva
     @PostMapping("/reservas")
-    public String criarReserva(Reserva reserva) {
+    public ResponseEntity<String> criarReserva(@RequestBody Reserva reserva) {
         try {
-            this.reservaService.CriarReserva(reserva);
-            return "Reserva criada com sucesso!";
+            reservaService.CriarReserva(reserva);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Reserva criada com sucesso!");
         } catch (IllegalArgumentException e) {
-            return "Erro ao criar reserva: " + e.getMessage();
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
     // Endpoint para deletar ou ccancelar uma reserva por ID
-    @PostMapping("/reservas/deletar/{id}")
-    public String deletarReservaPorId(int id) {
+    @DeleteMapping("/reservas/{id}")
+    public ResponseEntity<String> deletarReservaPorId(@PathVariable int id) {
         try {
             this.reservaService.DeletarReservaPorId((long) id);
-            return "Reserva deletada com sucesso!";
+            return ResponseEntity.noContent().build();
         } catch (IllegalArgumentException e) {
-            return "Erro ao deletar reserva: " + e.getMessage();
+            return ResponseEntity.badRequest().body("Erro ao deletar reserva: " + e.getMessage());
         }
     }
 }
