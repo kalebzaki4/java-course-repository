@@ -1,9 +1,11 @@
 package com.desafio.Reserva.de.salas.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
 import lombok.Data;
 
+import javax.net.ssl.SSLSession;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -15,7 +17,7 @@ public class Reserva {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String nome;
+    private String nomeReserva;
 
     @OneToOne
     @JoinColumn(name = "nome_sala")
@@ -35,4 +37,5 @@ public class Reserva {
     public LocalTime getDataHoraFim() {
         return horaFim;
     }
+
 }
