@@ -1,3 +1,7 @@
+Perfeito 👍
+Segue **exatamente o README em formato de terminal (bloco de código)** para você copiar e colar direto no `README.md`:
+
+```md
 # 📌 Sistema de Reserva de Salas (Java)
 
 Um sistema desenvolvido em **Java puro** para gerenciar reservas de salas — ideal para fins de aprendizado, prática de POO (Programação Orientada a Objetos) e organização de agendas de espaços.  
@@ -32,6 +36,7 @@ Ele funciona via **interface de terminal/console**, seguindo fluxo de menus simp
 
 ## 🧱 Estrutura do Projeto
 
+```
 
 Reserva-de-salas/
 ├── src/                 # Código-fonte principal
@@ -41,6 +46,8 @@ Reserva-de-salas/
 │   └── Main.java        # Entrada do programa
 ├── .gitignore
 └── README.md            # Este arquivo
+
+````
 
 ---
 
@@ -57,14 +64,16 @@ Antes de executar o projeto, certifique-se de ter:
 
 ### Usando IDE
 1. Clone o repositório:
-2. 
+   ```bash
    git clone https://github.com/kalebzaki4/java-course-repository.git
-
+````
 
 2. Abra o projeto na sua IDE favorita.
 3. Navegue até o diretório:
 
+   ```
    Java/Reserva de salas/Reserva-de-salas
+   ```
 4. Execute a classe `Main.java`.
 
 ---
@@ -96,16 +105,6 @@ Ao iniciar o sistema:
 ```
 
 O usuário escolhe a opção desejada e segue as instruções exibidas no console.
-
-## 🚧 Melhorias Futuras
-
-* Persistência de dados em arquivo ou banco de dados
-* Interface gráfica (Swing ou JavaFX)
-* Autenticação de usuários
-* Testes automatizados
-* Organização mais avançada por camadas (MVC)
-
----
 
 ## 🤝 Contribuindo
 
