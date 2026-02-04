@@ -1,130 +1,119 @@
-Perfeito 👍
-Segue **exatamente o README em formato de terminal (bloco de código)** para você copiar e colar direto no `README.md`:
+```markdown
+# 📌 Sistema de Reserva de Salas
 
-```md
-# 📌 Sistema de Reserva de Salas (Java)
+Sistema simples de gerenciamento de reservas de salas desenvolvido em **Java puro** (sem frameworks).  
+Ideal para estudo e prática de **Programação Orientada a Objetos**, estruturas de dados, CRUD e validação de regras de negócio.
 
-Um sistema desenvolvido em **Java puro** para gerenciar reservas de salas — ideal para fins de aprendizado, prática de POO (Programação Orientada a Objetos) e organização de agendas de espaços.  
-Este projeto faz parte do repositório **java-course-repository** e foi criado para consolidar conceitos de lógica, estrutura de dados, CRUD e interação via terminal.
+Projeto criado como exercício dentro do repositório [**java-course-repository**](https://github.com/kalebzaki4/java-course-repository).
 
----
+## ✨ Funcionalidades
 
-## 🚀 Descrição
+- Cadastro e listagem de **salas**
+- Cadastro e listagem de **usuários**
+- **Reserva** de salas com validação de conflitos de horário
+- Listagem de todas as reservas
+- **Edição** e **cancelamento** (remoção) de reservas
+- Interface 100% via **terminal** (menu interativo)
 
-O **Sistema de Reserva de Salas** permite que o usuário:
-
-✔ Cadastre salas e usuários  
-✔ Visualize salas disponíveis  
-✔ Realize reservas de salas em horários específicos  
-✔ Liste, edite e remova reservas existentes  
-
-Ele funciona via **interface de terminal/console**, seguindo fluxo de menus simples e intuitivos para operações básicas de reserva.
-
----
-
-## 🛠️ Funcionalidades Principais
-
-- 📌 Cadastro de sala  
-- 👤 Cadastro de usuário  
-- 📆 Registro de reservas com validação de disponibilidade  
-- 📋 Visualização de reservas  
-- ✏️ Atualização de registros  
-- ❌ Remoção de reservas  
-- 🧠 Validação de regras de negócio (ex: não permitir conflito de horários)
-
----
-
-## 🧱 Estrutura do Projeto
+## 🏗️ Estrutura do projeto
 
 ```
-
 Reserva-de-salas/
-├── src/                 # Código-fonte principal
-│   ├── model/           # Modelos de dados (Sala, Reserva, etc.)
-│   ├── service/         # Lógica de negócio
-│   ├── util/            # Utilitários
-│   └── Main.java        # Entrada do programa
+├── src/
+│   ├── model/         # Entidades: Sala, Usuario, Reserva
+│   ├── service/       # Regras de negócio e controle de reservas
+│   ├── util/          # Helpers (validações, formatação, scanner utilitário...)
+│   └── Main.java      # Ponto de entrada e menu principal
 ├── .gitignore
-└── README.md            # Este arquivo
+└── README.md
+```
 
-````
+## ⚡ Pré-requisitos
 
----
+- **Java 8+** (recomendado Java 11 ou 17 LTS)
+- Editor/IDE com suporte a Java  
+  (IntelliJ IDEA Community, Eclipse, VS Code + Extension Pack for Java)
 
-## ⚙️ Pré-requisitos
+## ▶️ Como rodar o projeto
 
-Antes de executar o projeto, certifique-se de ter:
-
-✔ **Java JDK 8 ou superior** instalado  
-✔ Um editor ou IDE (ex: **IntelliJ IDEA** ou **VS Code**) configurado para Java  
-
----
-
-## ▶️ Como Executar
-
-### Usando IDE
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/kalebzaki4/java-course-repository.git
-````
-
-2. Abra o projeto na sua IDE favorita.
-3. Navegue até o diretório:
-
-   ```
-   Java/Reserva de salas/Reserva-de-salas
-   ```
-4. Execute a classe `Main.java`.
-
----
-
-### Via Terminal
-
-Dentro da pasta do projeto:
+### 1. Via IDE (recomendado)
 
 ```bash
-javac -d out src/*.java
-java -cp out Main
+# 1. Clone o repositório principal
+git clone https://github.com/kalebzaki4/java-course-repository.git
+
+# 2. Abra o projeto na IDE
+# 3. Localize a pasta:
+#    java-course-repository/Java/Reserva-de-salas/Reserva-de-salas
+
+# 4. Execute a classe Main.java (botão Run ou clique direito → Run 'Main.main()')
 ```
 
-O sistema será iniciado exibindo um **menu interativo no terminal**.
+### 2. Via terminal (compilação manual)
 
----
+```bash
+# Entre na pasta do projeto
+cd Reserva-de-salas
 
-## 💡 Exemplo de Uso
+# Compile todos os arquivos .java
+javac -d bin src/**/*.java
 
-Ao iniciar o sistema:
-
-```
-=== Menu Principal ===
-1) Cadastrar sala
-2) Listar salas
-3) Reservar sala
-4) Listar reservas
-5) Sair
+# Execute o programa
+java -cp bin Main
 ```
 
-O usuário escolhe a opção desejada e segue as instruções exibidas no console.
+## 👀 Visual do menu principal (exemplo)
 
-## 🤝 Contribuindo
+```
+═══════════════════════════════════════════════
+          SISTEMA DE RESERVA DE SALAS
+═══════════════════════════════════════════════
 
-1. Faça um **fork** do projeto
-2. Crie uma **branch** para sua feature
-3. Commit suas alterações
-4. Abra um **Pull Request**
+1) Cadastrar nova sala
+2) Listar todas as salas
+3) Cadastrar usuário
+4) Fazer reserva
+5) Listar reservas
+6) Editar reserva
+7) Cancelar reserva
+8) Sair
 
-Toda contribuição é bem-vinda! 🚀
+Digite sua opção → 
+```
 
----
+## ✅ Regras de negócio implementadas
 
-## 📝 Licença
+- Uma sala não pode ter duas reservas no **mesmo horário**
+- Validação de existência de sala e usuário antes de reservar
+- Horários são tratados como **String** no formato HH:mm (simples e didático)
 
-Projeto open-source para fins educacionais.
-Sinta-se livre para usar, modificar e estudar o código.
+## 🤝 Como contribuir
 
----
+1. Faça **fork** do repositório
+2. Crie uma **branch**  
+   ```bash
+   git checkout -b feature/nome-da-sua-melhoria
+   ```
+3. Commit suas alterações  
+   ```bash
+   git commit -m 'feat: adiciona cancelamento em lote'
+   ```
+4. Push para a branch  
+   ```bash
+   git push origin feature/nome-da-sua-melhoria
+   ```
+5. Abra um **Pull Request**
 
-## 👤 Autor
+Toda ajuda é muito bem-vinda! 😄
 
-**Kaleb Santos**
-GitHub: [https://github.com/kalebzaki4](https://github.com/kalebzaki4)
+## 📄 Licença
+
+MIT License  
+Feito com fins 100% educacionais — sinta-se à vontade para estudar, copiar, modificar e usar em portfólio.
+
+## 👨‍💻 Autor
+
+**Kaleb Santos**  
+GitHub: [@kalebzaki4](https://github.com/kalebzaki4)
+
+Feito com ☕ e muita vontade de aprender Java!
