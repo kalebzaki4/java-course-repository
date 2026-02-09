@@ -1,11 +1,18 @@
-# To get started with Dependabot version updates, you'll need to specify which
-# package ecosystems to update and where the package manifests are located.
-# Please see the documentation for all configuration options:
-# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+# Configuração do Dependabot para atualizar dependências automaticamente
+# Docs oficiais: https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
 
 version: 2
 updates:
-  - package-ecosystem: "maven" # For Java projects using Maven
-    directory: "/Java/Reserva de salas/Reserva-de-salas" # Location of the pom.xml file
+  - package-ecosystem: "maven"          # ← importante: use "maven" para projetos Java com pom.xml
+    directory: "/Java/Reserva de salas/Reserva-de-salas"   # ← caminho até a pasta que tem o pom.xml
     schedule:
-      interval: "weekly"
+      interval: "weekly"              # pode ser "daily", "weekly" ou "monthly"
+    open-pull-requests-limit: 10      # máximo de PRs abertos ao mesmo tempo (evita flood)
+    target-branch: "main"             # ou "master", dependendo do seu branch principal
+    labels:                           # labels que vão aparecer nos PRs (opcional, mas ajuda)
+      - "dependencies"
+      - "java"
+      - "autoupdate"
+    commit-message:                   # deixa os commits mais bonitinhos e padronizados
+      prefix: "chore(deps)"
+      include: "deps"
