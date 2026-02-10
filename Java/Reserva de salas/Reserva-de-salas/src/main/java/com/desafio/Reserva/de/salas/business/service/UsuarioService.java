@@ -2,50 +2,42 @@ package com.desafio.Reserva.de.salas.business.service;
 
 import com.desafio.Reserva.de.salas.infrastructure.model.Usuario;
 import com.desafio.Reserva.de.salas.infrastructure.repository.UsuarioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@RequiredArgsConstructor
 public class UsuarioService {
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
 
     public Page<Usuario> listarUsuarios(Pageable pageable) {
-        try {
-            return usuarioRepository.findAll(pageable);
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Erro ao listar usuarios: " + e.getMessage());
-        }
+        return usuarioRepository.findAll(pageable);
     }
 
-    // Metodo para criar usuario
-    public void criarUsuario() {
-        try {
-            Usuario usuario = new Usuario();
-            usuario.setNome("Usuario " + System.currentTimeMillis());
-            usuarioRepository.save(usuario);
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Erro ao criar usuario: " + e.getMessage());
-        }
+    @Transactional
+    public Usuario criarUsuario(@Valid Usuario usuario) {
+        return usuarioRepository.save(usuario);
     }
 
-    // metodo para deletar usuario
+    @Transactional
     public void deletarUsuario(Long id) {
+        if (!usuarioRepository.existsById(id)) {
+            throw new IllegalArgumentException("Usuário com id " + id + " não encontrado.");
+        }
         usuarioRepository.deleteById(id);
-        System.out.println("Usuario com id " + id + " deletado com sucesso.");
     }
 
-    // metodo para atualizar usuario
-    public void atualizarUsuario(Long id, Usuario usuarioAtualizado) {
+    @Transactional
+    public Usuario atualizarUsuario(Long id, @Valid Usuario usuarioAtualizado) {
         Usuario usuarioExistente = usuarioRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Usuario com id " + id + " não encontrado."));
-
+                .orElseThrow(() -> new IllegalArgumentException("Usuário com id " + id + " não encontrado."));
         usuarioExistente.setNome(usuarioAtualizado.getNome());
 
-        usuarioRepository.save(usuarioExistente);
-        System.out.println("Usuario com id " + id + " atualizado com sucesso.");
+        return usuarioRepository.save(usuarioExistente);
     }
 }
