@@ -5,6 +5,7 @@ import com.desafio.Reserva.de.salas.infrastructure.model.Reserva;
 import com.desafio.Reserva.de.salas.infrastructure.model.Sala;
 import com.desafio.Reserva.de.salas.infrastructure.repository.ReservaRepository;
 import com.desafio.Reserva.de.salas.infrastructure.repository.SalaRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,6 +48,7 @@ public class ReservaService {
         }
     }
 
+    // listar todas as reservas
     public List<Reserva> ListarTodasReservas() {
         try {
             return reservaRepository.findAll();
@@ -54,4 +56,11 @@ public class ReservaService {
             throw new IllegalArgumentException("Erro ao listar reservas: " + e.getMessage());
         }
     }
+
+    // atualizar usuario
+    public void AtualizarReserva(Long id, @Valid Reserva reservaAtualizada) {
+        Reserva reservaExistente = reservaRepository.findById(id)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Reserva com ID " + id + " não encontrada."));
+    }
+
 }
