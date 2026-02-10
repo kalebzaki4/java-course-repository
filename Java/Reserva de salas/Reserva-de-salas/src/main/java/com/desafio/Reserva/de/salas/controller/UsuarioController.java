@@ -27,8 +27,7 @@ public class UsuarioController {
     @PostMapping
     public ResponseEntity<Usuario> criarUsuario(@Valid @RequestBody Usuario usuario) {
         Usuario salvo = this.usuarioService.criarUsuario(usuario);
-        return ResponseEntity.created(URI.create("/usuarios/" + salvo.getUsuarioId()))
-                .body(salvo);
+        return ResponseEntity.created(URI.create("/usuarios/" + salvo.getUsuarioId())).body(salvo);
     }
 
     @DeleteMapping("/{id}")
