@@ -61,4 +61,61 @@ public class LimpezaReservaTaskTest {
             limpezaReservaTask.excluirReservasVencidas();
         });
     }
+
+    @Test
+    public void deveManterReservaQuandoHorarioFimForIgualAoHorarioAtual() {
+        // arrange
+        LocalTime agora = LocalTime.now(limpezaReservaTask.getClock());
+        LocalDate hoje = LocalDate.now(limpezaReservaTask.getClock());
+        LocalDate dataLimite = hoje.minusDays(1);
+        LocalTime horarioEsperado = LocalTime.of(10, 0, 0);
+
+        // act
+        limpezaReservaTask.excluirReservasVencidas();
+
+        // verify
+        Mockito.verify(reservaRepository, Mockito.times(1))
+                .deleteByDataReservaBeforeOrDataReservaAndHoraFimBefore(
+                        dataLimite, hoje, agora
+                );
+
+        Assertions.assertEquals(horarioEsperado, agora, "O horário atual deve ser igual ao horário usado na exclusão");
+    }
+
+    @Test
+    public void DeveNuncaApagarReservasCasoEstejaVazio() {
+        // arrange
+        Mockito.when(reservaRepository.count()).thenReturn(0L);
+
+        // act
+        String resultado = limpezaReservaTask.excluirReservasVencidas();
+
+        // verify
+        Mockito.verify(reservaRepository, Mockito.never())
+                .deleteByDataReservaBeforeOrDataReservaAndHoraFimBefore(
+                        Mockito.any(LocalDate.class),
+                        Mockito.any(LocalDate.class),
+                        Mockito.any(LocalTime.class)
+                );
+        Assertions.assertEquals("Ops! Nenhuma reserva encontrada.", resultado);
+    }
+
+    @Test
+    public void deveLaancarDataAccessExceptionCasoRepositorioEstejaIndisponivel() {
+        // Arrange
+        Mockito.when(reservaRepository.count())
+                .thenThrow(new RuntimeException("Banco fora do ar"));
+
+        // Act & Assert
+        Assertions.assertThrows(RuntimeException.class, () -> {
+            limpezaReservaTask.excluirReservasVencidas();
+        });
+
+        // Verify
+        Mockito.verify(reservaRepository, Mockito.never())
+                .deleteByDataReservaBeforeOrDataReservaAndHoraFimBefore(
+                        Mockito.any(), Mockito.any(), Mockito.any()
+                );
+    }
+
 }

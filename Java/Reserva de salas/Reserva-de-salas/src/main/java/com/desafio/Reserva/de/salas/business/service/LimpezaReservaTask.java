@@ -29,13 +29,14 @@ public class LimpezaReservaTask {
 
     @Transactional
     @Scheduled(fixedRate = 300000)
-    public void excluirReservasVencidas() {
+    public String excluirReservasVencidas() {
         LocalDate hoje = LocalDate.now(clock);
         LocalTime agora = LocalTime.now(clock);
         LocalDate dataLimite = hoje.minusDays(1);
         reservaRepository.deleteByDataReservaBeforeOrDataReservaAndHoraFimBefore(dataLimite, hoje, agora);
 
         System.out.println("🧹 Faxina realizada: Reservas antigas removidas.");
+        return null;
     }
 
 }
