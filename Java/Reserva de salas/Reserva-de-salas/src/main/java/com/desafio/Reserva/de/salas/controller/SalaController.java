@@ -36,6 +36,26 @@ public class SalaController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deletarSala(@PathVariable Long id) {
+        try {
+            this.salaService.deletarSala(id);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Sala deletada com sucesso!");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> atualizarSala(@PathVariable Long id, @Valid @RequestBody Sala salaAtualizada) {
+        try {
+            this.salaService.atualizarSala(id, salaAtualizada);
+            return ResponseEntity.ok("Sala atualizada com sucesso!");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }
 
 

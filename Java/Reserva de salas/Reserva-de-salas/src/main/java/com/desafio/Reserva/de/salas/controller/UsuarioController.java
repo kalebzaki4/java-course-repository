@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import java.net.URI;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -24,21 +25,24 @@ public class UsuarioController {
         return ResponseEntity.ok(resultado);
     }
 
-    @PostMapping
+    @PostMapping("/cadastrar")
     public ResponseEntity<Usuario> criarUsuario(@Valid @RequestBody Usuario usuario) {
         Usuario salvo = this.usuarioService.criarUsuario(usuario);
+        System.out.println("Usuario criado com ID: " + salvo.getUsuarioId());
         return ResponseEntity.created(URI.create("/usuarios/" + salvo.getUsuarioId())).body(salvo);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deletarUsuario(@PathVariable Long id) {
         this.usuarioService.deletarUsuario(id);
+        System.out.println("Usuario com ID " + id + " deletado com sucesso.");
         return ResponseEntity.noContent().build();
     }
     @PutMapping("/{id}")
     public ResponseEntity<Usuario> atualizarUsuario(@PathVariable Long id,
                                                     @Valid @RequestBody Usuario usuarioAtualizado) {
         Usuario atualizado = usuarioService.atualizarUsuario(id, usuarioAtualizado);
+        System.out.println("Usuario com ID " + id + " atualizado com sucesso.");
         return ResponseEntity.ok(atualizado);
     }
 }
