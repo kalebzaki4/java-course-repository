@@ -49,4 +49,11 @@ public class ReservaController {
         this.reservaService.DeletarReservaPorId(id);
         return ResponseEntity.noContent().build();
     }
+
+    // Endpoint para atualizar uma reserva existente
+    @PutMapping("/{id}")
+    public ResponseEntity<String> atualizarReserva(@PathVariable Long id, @Valid @RequestBody Reserva reservaAtualizada) {
+        reservaService.AtualizarReserva(id, reservaAtualizada);
+        return ResponseEntity.ok("Reserva atualizada com sucesso!");
+    }
 }
