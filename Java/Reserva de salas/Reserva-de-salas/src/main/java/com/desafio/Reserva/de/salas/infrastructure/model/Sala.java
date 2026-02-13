@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Table(name = "salas")
 @Data
@@ -23,4 +25,7 @@ public class Sala {
 
     @AssertTrue(message = "A sala deve estar ativa ou inativa")
     private Boolean ativo;
+
+    @OneToMany(mappedBy = "sala", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Reserva> reservas;
 }
