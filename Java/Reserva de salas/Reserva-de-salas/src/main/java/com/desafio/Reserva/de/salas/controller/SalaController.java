@@ -14,8 +14,11 @@ import java.util.List;
 @RestController
 public class SalaController {
 
-    @Autowired
-    private SalaService salaService;
+    private final SalaService salaService;
+
+    public SalaController(SalaService salaService) {
+        this.salaService = salaService;
+    }
 
     @GetMapping
     public ResponseEntity<?> listarSalas() {
@@ -41,7 +44,7 @@ public class SalaController {
     public ResponseEntity<String> deletarSala(@PathVariable Long id) {
         try {
             this.salaService.deletarSala(id);
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Sala deletada com sucesso!");
+            return ResponseEntity.ok("Sala deletada com sucesso!");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
