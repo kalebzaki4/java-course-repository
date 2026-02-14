@@ -29,35 +29,27 @@ public class SalaController {
             return ResponseEntity.badRequest().body("Erro ao listar: " + e.getMessage());
         }
     }
-
+7
     @PostMapping
     public ResponseEntity<String> criarSala(@Valid @RequestBody Sala sala) {
-        try {
-            this.salaService.criarSala(sala);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Sala criada com sucesso!");
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        this.salaService.criarSala(sala);
+        System.out.println("Sala criada com ID: " + sala.getId());
+        return ResponseEntity.status(HttpStatus.CREATED).body("Sala criada com sucesso!");
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletarSala(@PathVariable Long id) {
-        try {
-            this.salaService.deletarSala(id);
-            return ResponseEntity.ok("Sala deletada com sucesso!");
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        this.salaService.deletarSala(id);
+        System.out.println("Sala com ID " + id + " deletada com sucesso.");
+        return ResponseEntity.ok("Sala deletada com sucesso!");
+
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<String> atualizarSala(@PathVariable Long id, @Valid @RequestBody Sala salaAtualizada) {
-        try {
-            this.salaService.atualizarSala(id, salaAtualizada);
-            return ResponseEntity.ok("Sala atualizada com sucesso!");
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        this.salaService.atualizarSala(id, salaAtualizada);
+        System.out.println("Sala com ID " + id + " atualizada com sucesso.");
+        return ResponseEntity.ok("Sala atualizada com sucesso!");
     }
 }
 
