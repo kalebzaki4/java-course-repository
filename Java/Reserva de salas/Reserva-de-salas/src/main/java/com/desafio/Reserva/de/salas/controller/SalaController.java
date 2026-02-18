@@ -29,7 +29,7 @@ public class SalaController {
             return ResponseEntity.badRequest().body("Erro ao listar: " + e.getMessage());
         }
     }
-
+7
     @PostMapping
     public ResponseEntity<String> criarSala(@Valid @RequestBody Sala sala) {
         this.salaService.criarSala(sala);
